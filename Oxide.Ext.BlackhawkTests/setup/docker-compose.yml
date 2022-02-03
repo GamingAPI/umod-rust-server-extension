@@ -1,0 +1,10 @@
+version: '3.0'
+services:
+  nats:
+    image: nats
+    command: "-c /etc/nats/nats.conf"
+    ports:
+      - 42222:4222
+    volumes:
+      - "./nats.conf:/etc/nats/nats.conf"
+    restart: unless-stopped
