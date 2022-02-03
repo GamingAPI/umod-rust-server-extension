@@ -1,2 +1,2 @@
-# Blackhawk-rust-extension
+# GamingEventApi-rust-extension
 

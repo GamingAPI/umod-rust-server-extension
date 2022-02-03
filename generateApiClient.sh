@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#rm -rf ./Oxide.Ext.Blackhawk/IO
+#rm -rf ./Oxide.Ext.GamingEventApi/IO
 
 set -e -x
 rm -rf ./blackhawk-api-client
