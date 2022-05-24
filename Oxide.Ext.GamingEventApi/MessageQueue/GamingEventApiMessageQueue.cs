@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Timers;
 
-namespace Oxide.Ext.GamingEventApi.MessageQueue
+namespace Oxide.Ext.GamingApi.MessageQueue
 {
     public sealed class GamingEventApiMessageQueue
     {

@@ -8,7 +8,7 @@ using Oxide.Core;
 using Org.OpenAPITools.Client;
 using Org.OpenAPITools.Api;
 
-namespace Oxide.Ext.GamingEventApi
+namespace Oxide.Ext.GamingApi
 {
 
     public class DefaultPluginInformation

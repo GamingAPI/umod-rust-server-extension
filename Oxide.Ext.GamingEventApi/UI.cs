@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Oxide.Ext.GamingEventApi
+namespace Oxide.Ext.GamingApi
 {
     public class UI
     {
