@@ -40,9 +40,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AsyncapiNatsClient">
-      <HintPath>..\..\rust-server-dotnet-library\AsyncapiNatsClient\bin\Debug\netstandard2.0\AsyncapiNatsClient.dll</HintPath>
-    </Reference>
     <Reference Include="NATS.Client, Version=0.14.5.0, Culture=neutral, PublicKeyToken=5b58bc7249e111a9, processorArchitecture=MSIL">
       <HintPath>..\packages\NATS.Client.0.14.5\lib\net46\NATS.Client.dll</HintPath>
     </Reference>
@@ -51,10 +48,6 @@
     </Reference>
     <Reference Include="nunit.framework, Version=3.12.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.12.0\lib\net45\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="RustApi, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\nats-rust-server-client\Dotnet.Nats.Client\bin\Debug\RustApi.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Collections.Specialized, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -86,6 +79,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="GamingApiNatsTests.cs" />
+    <Compile Include="GamingApiTestNats.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
