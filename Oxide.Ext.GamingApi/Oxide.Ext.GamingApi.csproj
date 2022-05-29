@@ -31,7 +31,7 @@
     <Reference Include="Rust.UI">
       <HintPath>..\dependencies\Rust.UI.dll</HintPath>
     </Reference>
-    <PackageReference Include="RustGameAPI" Version="0.3.0"/>
+    <PackageReference Include="RustGameAPI"/>
     <PackageReference Include="NATS.Client" Version="0.12.0"/>
     <Reference Include="System"/>
     <Reference Include="System.Configuration"/>
