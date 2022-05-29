@@ -16,15 +16,12 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-dotnet@v1
+      - uses: actions/setup-dotnet@v2
         with:
           dotnet-version: '5.0.x' # SDK Version to use.
           source-url: https://nuget.pkg.github.com/GamingAPI/index.json
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          
-      - name: Setup MSBuild Path
-        uses: warrenbuckley/Setup-MSBuild@v1
       - name: Install dependencies
         run: dotnet restore
       - name: 'Automated Version Bump'
