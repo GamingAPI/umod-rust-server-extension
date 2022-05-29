@@ -10,11 +10,11 @@
     <RepositoryUrl>https://github.com/GamingAPI/umod-rust-server-extension.git</RepositoryUrl>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="NATS.Client"/>
-    <None Remove="RustGameAPI"/>
+    <None Remove="NATS.Client" />
+    <None Remove="RustGameAPI" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp"/>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Oxide.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dependencies\Oxide.Core.dll</HintPath>
@@ -31,19 +31,19 @@
     <Reference Include="Rust.UI">
       <HintPath>..\dependencies\Rust.UI.dll</HintPath>
     </Reference>
-    <PackageReference Include="RustGameAPI"/>
-    <PackageReference Include="NATS.Client" Version="0.12.0"/>
-    <Reference Include="System"/>
-    <Reference Include="System.Configuration"/>
-    <Reference Include="System.Configuration.Install"/>
-    <Reference Include="System.Data"/>
-    <Reference Include="System.Drawing"/>
-    <Reference Include="System.Numerics"/>
-    <Reference Include="System.Runtime.Serialization"/>
-    <Reference Include="System.Security"/>
-    <Reference Include="System.Transactions"/>
-    <Reference Include="System.Xml"/>
-    <Reference Include="System.Xml.Linq"/>
+    <PackageReference Include="RustGameAPI" Version="0.*" />
+    <PackageReference Include="NATS.Client" Version="0.12.0" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="Unity.TextMeshPro">
       <HintPath>..\dependencies\Unity.TextMeshPro.dll</HintPath>
     </Reference>
