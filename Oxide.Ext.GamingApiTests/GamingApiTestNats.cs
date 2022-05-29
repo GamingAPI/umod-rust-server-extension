@@ -1,14 +1,10 @@
-﻿
+﻿using NATS.Client;
+using System;
 
 namespace Oxide.Ext.GamingApiTest
 {
     
-    using Newtonsoft.Json.Linq;
-    using System;
-    using System.Collections.Generic;
-    using System.Threading;
-    using System.Timers;
-    public class GamingApiTestNats : Asyncapi.Nats.TestClient.NatsTestClient
+    public class GamingApiTestNats : Asyncapi.
     {
         private static GamingApiTestNats instance = null;
 

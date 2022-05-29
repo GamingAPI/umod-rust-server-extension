@@ -1,18 +1,15 @@
 ﻿using NATS.Client;
-using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
-using System.Timers;
-
+using Asyncapi.Nats.Client;
 
 namespace Oxide.Ext.GamingApi
 {
-    public class GamingApiNats : Asyncapi.Nats.Client.NatsClient
+    public class GamingApiNats : NatsClient
     {
         private static GamingApiNats instance = null;
-        private class Imp : Asyncapi.Nats.Client.LoggingInterface
+        private class Imp : LoggingInterface
         {
             public void Debug(string m)
             {
@@ -29,7 +26,7 @@ namespace Oxide.Ext.GamingApi
                 Trace.WriteLine(m);
             }
         }
-        private GamingApiNats(Asyncapi.Nats.Client.LoggingInterface logger)
+        private GamingApiNats(LoggingInterface logger)
         {
             this.Logger = logger;
             Options opts = ConnectionFactory.GetDefaultOptions();
@@ -158,7 +155,7 @@ namespace Oxide.Ext.GamingApi
                 throw ae;
             }
         }
-        public static GamingApiNats SetInstance(Asyncapi.Nats.Client.LoggingInterface logger)
+        public static GamingApiNats SetInstance(LoggingInterface logger)
         {
             try
             {
