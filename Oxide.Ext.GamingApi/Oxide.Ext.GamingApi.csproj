@@ -1,54 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E7ECDD31-5969-43AF-A7E1-31E04631124C}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Oxide.Ext.GamingApi</RootNamespace>
     <AssemblyName>Oxide.Ext.GamingApi</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <TargetFrameworks>net461</TargetFrameworks>
     <Version>0.0.0</Version>
     <PackageVersion>0.0.0</PackageVersion>
     <AssemblyVersion>0.0.0.0</AssemblyVersion>
     <FileVersion>0.0.0.0</FileVersion>
     <RepositoryUrl>https://github.com/GamingAPI/umod-rust-server-extension.git</RepositoryUrl>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-    <LangVersion>6</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
-    <Compile Include="GamingApiExtension.cs" />
-    <Compile Include="UI.cs" />
-    <Compile Include="DefaultPluginInformation.cs" />
-    <Compile Include="MessageQueue\GamingApiMessageQueue.cs" />
-    <Compile Include="GamingApiNats.cs" />
-    <Compile Include="MessageQueue\MessageImportance.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Remove="NATS.Client"/>
+    <None Remove="RustGameAPI"/>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -64,9 +28,6 @@
     </Reference>
     <Reference Include="RestSharp">
       <HintPath>..\dependencies\RestSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="RestSharp.Build">
-      <HintPath>..\dependencies\RestSharp.Build.dll</HintPath>
     </Reference>
     <Reference Include="Rust.UI">
       <HintPath>..\dependencies\Rust.UI.dll</HintPath>
@@ -268,30 +229,4 @@
       <HintPath>..\dependencies\UnityEngine.XRModule.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\dependencies\Oxide.Core.dll" />
-    <Content Include="..\dependencies\Oxide.References.dll" />
-    <Content Include="..\dependencies\RestSharp.dll" />
-    <Content Include="..\dependencies\RestSharp.pdb" />
-    <Content Include="..\dependencies\RestSharp.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
