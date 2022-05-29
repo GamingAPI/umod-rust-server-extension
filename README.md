@@ -1,2 +1,2 @@
-# GamingEventApi-rust-extension
+# GamingApi-rust-extension
 

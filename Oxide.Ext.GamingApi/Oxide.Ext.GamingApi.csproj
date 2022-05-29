@@ -42,11 +42,11 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="GamingEventApiExtension.cs" />
+    <Compile Include="GamingApiExtension.cs" />
     <Compile Include="UI.cs" />
     <Compile Include="DefaultPluginInformation.cs" />
-    <Compile Include="MessageQueue\GamingEventApiMessageQueue.cs" />
-    <Compile Include="GamingEventApiNats.cs" />
+    <Compile Include="MessageQueue\GamingApiMessageQueue.cs" />
+    <Compile Include="GamingApiNats.cs" />
     <Compile Include="MessageQueue\MessageImportance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -337,12 +337,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\GamingEventApi-api-client\src\Org.OpenAPITools\Org.OpenAPITools.csproj">
-      <Project>{5f77a767-439e-4dd9-89fd-a2b9095a4158}</Project>
-      <Name>Org.OpenAPITools</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -85,7 +85,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="GamingEventApiNatsTests.cs" />
+    <Compile Include="GamingApiNatsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -5,7 +5,7 @@ using System.Timers;
 
 namespace Oxide.Ext.GamingApi.MessageQueue
 {
-    public sealed class GamingEventApiMessageQueue
+    public sealed class GamingApiMessageQueue
     {
         //The two types of message queue's with the given message importance.
         private readonly Dictionary<MessageImportance, Queue<Action<Action, Action>>> retryMessageQueue;
@@ -14,7 +14,7 @@ namespace Oxide.Ext.GamingApi.MessageQueue
         private Timer queueTimer;
         Boolean shouldRetryMessageQueue = false;
 
-        private GamingEventApiMessageQueue()
+        private GamingApiMessageQueue()
         {
             InitQueues(out retryMessageQueue);
             InitQueues(out messageQueue);
@@ -42,7 +42,7 @@ namespace Oxide.Ext.GamingApi.MessageQueue
         /// </summary>
         public void FlushMessages()
         {
-            Console.WriteLine("GamingEventApiMessageQueue : FLUSHING MESSAGES");
+            Console.WriteLine("GamingApiMessageQueue : FLUSHING MESSAGES");
             Timer flushTimer = new Timer();
             flushTimer.Elapsed += new ElapsedEventHandler(CallMessageInQueue);
             flushTimer.Interval = 10; // 100 messages a second
@@ -52,7 +52,7 @@ namespace Oxide.Ext.GamingApi.MessageQueue
                 if (currentMessageCount == 0)
                 {
                     flushTimer.Stop();
-                    Console.WriteLine("GamingEventApiMessageQueue : DONE FLUSHING MESSAGES");
+                    Console.WriteLine("GamingApiMessageQueue : DONE FLUSHING MESSAGES");
                 }
             });
             flushTimer.Start();
@@ -108,7 +108,7 @@ namespace Oxide.Ext.GamingApi.MessageQueue
             }
             catch (ArgumentNullException e)
             {
-                Console.WriteLine("GamingEventApiMessageQueue : ArgumentNullException: " + e.ToString() + ", loosing message!!!!!!!!!!!!!!!!");
+                Console.WriteLine("GamingApiMessageQueue : ArgumentNullException: " + e.ToString() + ", loosing message!!!!!!!!!!!!!!!!");
             }
             messageImportance = MessageImportance.UNKNOWN;
             action = null;
@@ -181,7 +181,7 @@ namespace Oxide.Ext.GamingApi.MessageQueue
             }
             else
             {
-                Console.WriteLine("GamingEventApiMessageQueue : No queue found for message importance: " + importance.ToString() + ", loosing message!!!!!!!!!!!!!!!!");
+                Console.WriteLine("GamingApiMessageQueue : No queue found for message importance: " + importance.ToString() + ", loosing message!!!!!!!!!!!!!!!!");
             }
         }
 
@@ -194,7 +194,7 @@ namespace Oxide.Ext.GamingApi.MessageQueue
             AddMessageToQueue(messageQueue, importance, action);
         }
 
-        public static GamingEventApiMessageQueue Instance { get { return Nested.instance; } }
+        public static GamingApiMessageQueue Instance { get { return Nested.instance; } }
 
         private class Nested
         {
@@ -204,7 +204,7 @@ namespace Oxide.Ext.GamingApi.MessageQueue
             {
             }
 
-            internal static readonly GamingEventApiMessageQueue instance = new GamingEventApiMessageQueue();
+            internal static readonly GamingApiMessageQueue instance = new GamingApiMessageQueue();
         }
     }
 }

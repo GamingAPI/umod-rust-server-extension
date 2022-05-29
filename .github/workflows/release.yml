@@ -32,7 +32,7 @@ jobs:
         with: 
           skip-tag: 'true'
           skip-commit: 'true'
-          path-to-file: './Oxide.Ext.GamingEventApi\Oxide.Ext.GamingApi.csproj'
+          path-to-file: './Oxide.Ext.GamingApi\Oxide.Ext.GamingApi.csproj'
           release-commit-message-regex: 'chore\(release\): v{{version}}'
       - if: steps.version_bump.outputs.wasBumped == 'true' 
         run: dotnet build --configuration Release Oxide.Ext.GamingApi

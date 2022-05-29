@@ -9,9 +9,9 @@ using System.Timers;
 
 namespace Oxide.Ext.GamingApi
 {
-    public class GamingEventApiNats : Asyncapi.Nats.Client.NatsClient
+    public class GamingApiNats : Asyncapi.Nats.Client.NatsClient
     {
-        private static GamingEventApiNats instance = null;
+        private static GamingApiNats instance = null;
         private class Imp : Asyncapi.Nats.Client.LoggingInterface
         {
             public void Debug(string m)
@@ -29,7 +29,7 @@ namespace Oxide.Ext.GamingApi
                 Trace.WriteLine(m);
             }
         }
-        private GamingEventApiNats(Asyncapi.Nats.Client.LoggingInterface logger)
+        private GamingApiNats(Asyncapi.Nats.Client.LoggingInterface logger)
         {
             this.Logger = logger;
             Options opts = ConnectionFactory.GetDefaultOptions();
@@ -74,7 +74,7 @@ namespace Oxide.Ext.GamingApi
             opts.SetNkey(this.GetNatsNkeyUser(), sigEh);
             this.Connect(opts);
         }
-        private GamingEventApiNats() : this(new Imp())
+        private GamingApiNats() : this(new Imp())
         {
         }
 
@@ -137,14 +137,14 @@ namespace Oxide.Ext.GamingApi
         #region Singleton
         static ReaderWriterLock rwl = new ReaderWriterLock();
         static int timeOut = 5000;
-        public static GamingEventApiNats SetInstance()
+        public static GamingApiNats SetInstance()
         {
             try
             {
                 rwl.AcquireWriterLock(timeOut);
                 try
                 {
-                    instance = new GamingEventApiNats();
+                    instance = new GamingApiNats();
                     return instance;
                 }
                 finally
@@ -158,14 +158,14 @@ namespace Oxide.Ext.GamingApi
                 throw ae;
             }
         }
-        public static GamingEventApiNats SetInstance(Asyncapi.Nats.Client.LoggingInterface logger)
+        public static GamingApiNats SetInstance(Asyncapi.Nats.Client.LoggingInterface logger)
         {
             try
             {
                 rwl.AcquireWriterLock(timeOut);
                 try
                 {
-                    instance = new GamingEventApiNats(logger);
+                    instance = new GamingApiNats(logger);
                     return instance;
                 }
                 finally
@@ -179,7 +179,7 @@ namespace Oxide.Ext.GamingApi
                 throw ae;
             }
         }
-        public static GamingEventApiNats GetInstance()
+        public static GamingApiNats GetInstance()
         {
             try
             {

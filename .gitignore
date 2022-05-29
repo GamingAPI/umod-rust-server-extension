@@ -337,4 +337,6 @@ ASALocalRun/
 healthchecksdb
 
 
-node_modules
+
+[Rr]elease/
+[Rr]eleases/

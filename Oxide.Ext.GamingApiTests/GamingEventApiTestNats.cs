@@ -8,9 +8,9 @@ namespace Oxide.Ext.GamingApiTest
     using System.Collections.Generic;
     using System.Threading;
     using System.Timers;
-    public class GamingEventApiTestNats : Asyncapi.Nats.TestClient.NatsTestClient
+    public class GamingApiTestNats : Asyncapi.Nats.TestClient.NatsTestClient
     {
-        private static GamingEventApiTestNats instance = null;
+        private static GamingApiTestNats instance = null;
 
         private class Imp : Asyncapi.Nats.Client.LoggingInterface
         {
@@ -29,18 +29,18 @@ namespace Oxide.Ext.GamingApiTest
                 Console.WriteLine(m);
             }
         }
-        private GamingEventApiTestNats()
+        private GamingApiTestNats()
         {
             this.Logger = new Imp();
         }
 
 
         #region Singleton
-        public static GamingEventApiTestNats getInstance()
+        public static GamingApiTestNats getInstance()
         {
             if (instance == null)
             {
-                instance = new GamingEventApiTestNats();
+                instance = new GamingApiTestNats();
             }
             return instance;
         }

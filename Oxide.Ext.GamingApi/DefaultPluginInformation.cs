@@ -1,12 +1,9 @@
-﻿// Reference: Org.OpenAPITools
-// Reference: NATS.Client
+﻿// Reference: NATS.Client
 using Oxide.Core.Libraries;
 using System;
 using System.Collections.Generic;
 using static Oxide.Core.Libraries.Timer;
 using Oxide.Core;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Api;
 
 namespace Oxide.Ext.GamingApi
 {
@@ -19,73 +16,31 @@ namespace Oxide.Ext.GamingApi
         public static String adminColor = "#E31818";
         public static String nameColor = "#ffffff";
         public static String statColor = "#E36753";
-        public IPlayerApi PlayerApi { get; }
-        public IServerApi ServerApi { get; }
-        public GamingEventApiNats NatsClient { get; }
+        public GamingApiNats NatsClient { get; }
 
         private class Logger : Asyncapi.Nats.Client.LoggingInterface
         {
             public void Debug(string m)
             {
-                Interface.Oxide.LogDebug("[GamingEventApi DefaultPluginInformation]" + m);
+                Interface.Oxide.LogDebug("[GamingApi DefaultPluginInformation]" + m);
             }
 
             public void Error(string m)
             {
-                Interface.Oxide.LogError("[GamingEventApi DefaultPluginInformation]" + m);
+                Interface.Oxide.LogError("[GamingApi DefaultPluginInformation]" + m);
             }
 
             public void Info(string m)
             {
-                Interface.Oxide.LogInfo("[GamingEventApi DefaultPluginInformation]" + m);
+                Interface.Oxide.LogInfo("[GamingApi DefaultPluginInformation]" + m);
             }
         }
 
         private DefaultPluginInformation()
         {
-            ApiClient client = new ApiClient();
-            client.RestClient.Timeout = 20000;
-            Configuration config = new Configuration();
-            config.ApiKey.Add("Bearer", "" + GetApiToken());
-            config.ApiKeyPrefix.Add("Bearer", "Bearer");
-            config.AddDefaultHeader("content-type", "application/json");
-            config.BasePath = DefaultPluginInformation.GetApiBasePath();
-            PlayerApi = new PlayerApi(config);
-            ServerApi = new ServerApi(config);
-            this.NatsClient = GamingEventApiNats.SetInstance(new Logger());
+            this.NatsClient = GamingApiNats.SetInstance(new Logger());
         }
 
-
-
-        public static string GetApiBasePath()
-        {
-            var envName = "BLACKHAWK_SERVER_API_BASE_PATH";
-            var value = Environment.GetEnvironmentVariable(envName);
-            if (value == null)
-            {
-                Interface.Oxide.LogInfo($"{envName} environment variable not sat using default value.");
-                return "https://www.rustblackhawk.com/api";
-            }
-            else
-            {
-                return value;
-            }
-        }
-
-        public static string GetApiToken()
-        {
-            var envName = "BLACKHAWK_SERVER_API_KEY";
-            var value = Environment.GetEnvironmentVariable(envName);
-            if (value == null)
-            {
-                Interface.Oxide.LogInfo($"{envName} environment variable not sat using default value.");
-                return "Token";
-            }
-            else
-            {
-                return value;
-            }
-        }
         public static string GetServerId()
         {
             var envName = "BLACKHAWK_SERVER_ID";
@@ -100,8 +55,6 @@ namespace Oxide.Ext.GamingApi
                 return value;
             }
         }
-
-
 
         //Timers if no message from api
         private Dictionary<int, TimerInstance> timers = new Dictionary<int, TimerInstance>();

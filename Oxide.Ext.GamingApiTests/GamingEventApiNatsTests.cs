@@ -8,7 +8,7 @@ using System.Threading;
 namespace Oxide.Ext.GamingApi.Tests
 {
     [TestFixture()]
-    public class GamingEventApiNatsTests
+    public class GamingApiNatsTests
     {
         public static string GetConfigDir()
         {
@@ -21,17 +21,17 @@ namespace Oxide.Ext.GamingApi.Tests
             return configDirPath;
         }
 
-        GamingEventApiNats blackhawkNats;
-        GamingEventApiTestNats blackhawkTestNats;
+        GamingApiNats blackhawkNats;
+        GamingApiTestNats blackhawkTestNats;
         AutoResetEvent stopWaitHandle = new AutoResetEvent(false);
         [SetUp()]
         public void setup()
         {
             Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
-            blackhawkNats = GamingEventApiNats.GetInstance();
+            blackhawkNats = GamingApiNats.GetInstance();
             Trace.AutoFlush = true;
             Trace.Indent();
-            blackhawkTestNats = GamingEventApiTestNats.getInstance();
+            blackhawkTestNats = GamingApiTestNats.getInstance();
             Options opts = ConnectionFactory.GetDefaultOptions();
             opts.AsyncErrorEventHandler += (sender, args) =>
             {

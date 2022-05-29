@@ -7,18 +7,18 @@
     using Oxide.Core.Extensions;
     using Oxide.Ext.GamingApi;
 
-    public class GamingEventApiExtension : Extension
+    public class GamingApiExtension : Extension
     {
         internal static readonly Version AssemblyVersion = Assembly.GetExecutingAssembly().GetName().Version;
 
-        public GamingEventApiExtension(ExtensionManager manager) : base(manager)
+        public GamingApiExtension(ExtensionManager manager) : base(manager)
         {
-            Interface.Oxide.LogInfo("[GamingEventApi Ext] Started");
+            Interface.Oxide.LogInfo("[GamingApi Ext] Started");
         }
 
         ////public override bool SupportsReloading => true;
 
-        public override string Name => "GamingEventApi";
+        public override string Name => "GamingApi";
 
         public override string Author => "Lagoni";
 
@@ -34,9 +34,9 @@
 
         public override void OnShutdown()
         {
-            GamingEventApiNats.GetInstance()?.Close();
+            GamingApiNats.GetInstance()?.Close();
 
-            Interface.Oxide.LogInfo("[GamingEventApi Ext] Disconnected nats client");
+            Interface.Oxide.LogInfo("[GamingApi Ext] Disconnected nats client");
         }
     }
 }
