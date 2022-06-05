@@ -49,7 +49,8 @@ jobs:
             New server extension release v${{steps.version_bump.outputs.newVersion}}
           draft: false
           prerelease: false
-      - uses: xresloader/upload-to-github-release@v1.3.4
+      - name: Upload files to github release
+        uses: xresloader/upload-to-github-release@v1.3.4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
