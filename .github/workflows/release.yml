@@ -61,6 +61,13 @@ jobs:
           overwrite: true
           verbose: true
           draft: false
+      - if: steps.version_bump.outputs.wasBumped == 'true' 
+        name: Set latest release
+        uses: xresloader/upload-to-github-release@v1.3.4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_id: ${{ steps.create_release.outputs.id }}
           update_latest_release: true
       - if: steps.version_bump.outputs.wasBumped == 'true' 
         name: Publish the nuget package to GitHub registry
