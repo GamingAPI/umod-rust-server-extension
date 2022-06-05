@@ -11,9 +11,6 @@ on:
 jobs:
   release:
     runs-on: windows-2019
-    permissions:
-      packages: write
-      contents: write
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-dotnet@v2
@@ -36,13 +33,8 @@ jobs:
           path-to-file: './Oxide.Ext.GamingApi/Oxide.Ext.GamingApi.csproj'
           release-commit-message-regex: 'chore\(release\): v{{version}}'
       - if: steps.version_bump.outputs.wasBumped == 'true' 
-        run: dotnet build --configuration Release Oxide.Ext.GamingApi --no-restore
-      - if: steps.version_bump.outputs.wasBumped == 'true' 
         name: Create the package
         run: dotnet pack --configuration Release Oxide.Ext.GamingApi --no-restore
-      - if: steps.version_bump.outputs.wasBumped == 'true' 
-        name: Publish the package to GitHub registry
-        run: dotnet nuget push Oxide.Ext.GamingApi\bin\Release\Oxide.Ext.GamingApi.*.nupkg --api-key ${{secrets.NUGET_AUTH_TOKEN}} 
       - name: Create GH release
         id: create_release
         uses: actions/create-release@v1
@@ -55,7 +47,7 @@ jobs:
             New server extension release v${{steps.version_bump.outputs.newVersion}}
           draft: false
           prerelease: false
-      - uses: xresloader/upload-to-github-release@master
+      - uses: xresloader/upload-to-github-release@v1.3.4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -63,6 +55,10 @@ jobs:
           release_id: ${{ steps.create_release.outputs.id }}
           overwrite: true
           verbose: true
+          draft: false
+          update_latest_release: true
+      - if: steps.version_bump.outputs.wasBumped == 'true' 
+        run: dotnet build --configuration Release Oxide.Ext.GamingApi --no-restore
       - if: steps.version_bump.outputs.wasBumped == 'true'
         name: Create Pull Request with bumped version
         uses: peter-evans/create-pull-request@v3
