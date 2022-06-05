@@ -37,7 +37,8 @@ jobs:
       - if: steps.version_bump.outputs.wasBumped == 'true' 
         name: Create the nuget package
         run: dotnet pack --configuration Release Oxide.Ext.GamingApi --no-restore
-      - name: Create GH release
+      - if: steps.version_bump.outputs.wasBumped == 'true' 
+        name: Create GH release
         id: create_release
         uses: actions/create-release@v1
         env:
@@ -49,7 +50,8 @@ jobs:
             New server extension release v${{steps.version_bump.outputs.newVersion}}
           draft: false
           prerelease: false
-      - name: Upload files to github release
+      - if: steps.version_bump.outputs.wasBumped == 'true' 
+        name: Upload files to github release
         uses: xresloader/upload-to-github-release@v1.3.4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
