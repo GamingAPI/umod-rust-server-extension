@@ -75,9 +75,3 @@ jobs:
           title: 'chore(release): v${{steps.version_bump.outputs.newVersion}}'
           body: Version bump
           branch: 'version-bump/v${{steps.version_bump.outputs.newVersion}}'
-
-    package=$(curl -s https://api.github.com/repos/errata-ai/vale/releases/latest \
-    | jq -r ' .assets[] | select(.name | contains("Linux"))'); output=$(mktemp -d); \
-    echo $package | jq -r '.browser_download_url' | xargs curl -L --output-dir $output -O; \
-    echo $package | jq -r '.name' | sed -r "s#(.*)#$output/\1#g" | xargs cat \
-    | tar xzf - -C $output; cp $output/vale $HOME/bin
