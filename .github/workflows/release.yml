@@ -45,7 +45,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: v${{steps.version_bump.outputs.newVersion}}
-          release_name: Release v${{steps.version_bump.outputs.newVersion}}
+          release_name: v${{steps.version_bump.outputs.newVersion}}
           body: |
             New server extension release v${{steps.version_bump.outputs.newVersion}}
           draft: false
