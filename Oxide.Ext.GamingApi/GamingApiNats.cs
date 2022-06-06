@@ -77,7 +77,7 @@ namespace Oxide.Ext.GamingApi
 
         private string GetNatsHost()
         {
-            var envName = "BLACKHAWK_SERVER_NATS_HOST";
+            var envName = "GAMINGAPI_NATS_SERVER_HOST";
             var value = Environment.GetEnvironmentVariable(envName);
             if (value == null)
             {
@@ -92,7 +92,7 @@ namespace Oxide.Ext.GamingApi
         private string GetServerId()
         {
             
-            var envName = "BLACKHAWK_SERVER_ID";
+            var envName = "GAMINGAPI_SERVER_ID";
             var value = Environment.GetEnvironmentVariable(envName);
             if (value == null)
             {
@@ -106,7 +106,7 @@ namespace Oxide.Ext.GamingApi
         }
         private string GetNatsNkeyUser()
         {
-            var envName = $"BLACKHAWK_SERVER_{GetServerId()}_NATS_NKEY_USER"; 
+            var envName = $"GAMINGAPI_NATS_NKEY_USER"; 
             var value = Environment.GetEnvironmentVariable(envName);
             if (value == null)
             {
@@ -119,7 +119,7 @@ namespace Oxide.Ext.GamingApi
         }
         private string GetNatsNkeySeed()
         {
-            var envName = $"BLACKHAWK_SERVER_{GetServerId()}_NATS_NKEY_SEED";
+            var envName = $"GAMINGAPI_NATS_NKEY_SEED";
             var value = Environment.GetEnvironmentVariable(envName);
             if (value == null)
             {
