@@ -43,7 +43,7 @@ namespace Oxide.Ext.GamingApi
 
         public static string GetServerId()
         {
-            var envName = "BLACKHAWK_SERVER_ID";
+            var envName = "GAMINGAPI_SERVER_ID";
             var value = Environment.GetEnvironmentVariable(envName);
             if (value == null)
             {

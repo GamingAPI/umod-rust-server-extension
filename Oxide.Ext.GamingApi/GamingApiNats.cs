@@ -82,22 +82,7 @@ namespace Oxide.Ext.GamingApi
             if (value == null)
             {
                 Console.WriteLine($"NATS: {envName} environment variable not sat using default value.");
-                return "nats://localhost:42222";
-            }
-            else
-            {
-                return value;
-            }
-        }
-        private string GetServerId()
-        {
-            
-            var envName = "GAMINGAPI_SERVER_ID";
-            var value = Environment.GetEnvironmentVariable(envName);
-            if (value == null)
-            {
-                Console.WriteLine($"NATS: {envName} environment variable not sat using default value.");
-                return "" + 0;
+                return "nats://localhost:4222";
             }
             else
             {
