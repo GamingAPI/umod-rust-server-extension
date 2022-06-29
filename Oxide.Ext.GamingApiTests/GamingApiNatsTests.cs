@@ -1,4 +1,5 @@
-﻿using NATS.Client;
+﻿using Asyncapi.Nats.Client;
+using NATS.Client;
 using NUnit.Framework;
 using System;
 using System.Diagnostics;
@@ -10,61 +11,34 @@ namespace Oxide.Ext.GamingApi.Tests
     [TestFixture()]
     public class GamingApiNatsTests
     {
-        public static string GetConfigDir()
-        {
-            Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
-            var evan = System.Environment.CurrentDirectory;
-            var configDirPath = Path.Combine(evan, "../../setup");
-            if (!Directory.Exists(configDirPath))
-                throw new DirectoryNotFoundException($"The Config dir was not found at: '{configDirPath}'.");
-
-            return configDirPath;
-        }
-
         GamingApiNats blackhawkNats;
-        GamingApiTestNats blackhawkTestNats;
-        AutoResetEvent stopWaitHandle = new AutoResetEvent(false);
+
         [SetUp()]
         public void setup()
         {
-            Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
-            blackhawkNats = GamingApiNats.GetInstance();
-            Trace.AutoFlush = true;
-            Trace.Indent();
-            blackhawkTestNats = GamingApiTestNats.getInstance();
+            Environment.SetEnvironmentVariable("GAMINGAPI_NATS_NKEY_USER", "UCI2NCSIEV3DXLYYR5KQXYCZ7CIW4KYXHLSGXJOZ7TSRRKHP2BM5IVMU");
+            Environment.SetEnvironmentVariable("GAMINGAPI_NATS_NKEY_SEED", "SUAHZGQCK3PKMY5JBY2PBJUK2SA2IAGNX7VXYQJ75MLIU2IWQE235OBLJM");
+            blackhawkNats = GamingApiNats.SetInstance();
+        }
+
+        [TearDown()]
+        public void teardown()
+        {
+            blackhawkNats?.Close();
+        }
+
+        [Test()]
+        [Ignore("For now")]
+        public void shouldSetup()
+        {
+            NatsClient instance = new NatsClient();
             Options opts = ConnectionFactory.GetDefaultOptions();
-            opts.AsyncErrorEventHandler += (sender, args) =>
-            {
-                Trace.WriteLine("Error: ");
-                Trace.WriteLine("   Server: " + args.Conn.ConnectedUrl);
-                Trace.WriteLine("   Message: " + args.Error);
-                Trace.WriteLine("   Subject: " + args.Subscription.Subject);
-            };
 
-            opts.ServerDiscoveredEventHandler += (sender, args) =>
-            {
-                Trace.WriteLine("A new server has joined the cluster:");
-                Trace.WriteLine("    " + String.Join(", ", args.Conn.DiscoveredServers));
-            };
-
-            opts.ClosedEventHandler += (sender, args) =>
-            {
-                Trace.WriteLine("Connection Closed: ");
-                Trace.WriteLine("   Server: " + args.Conn.ConnectedUrl);
-            };
-
-            opts.DisconnectedEventHandler += (sender, args) =>
-            {
-                Trace.WriteLine("Connection Disconnected: ");
-                Trace.WriteLine("   Server: " + args.Conn.ConnectedUrl);
-            };
-            opts.Url = "nats://localhost:42222";
-            
-            var configDirPath = Path.Combine(GetConfigDir(), "user.nk");
+            opts.Url = "nats://localhost:4222";
             EventHandler<UserSignatureEventArgs> sigEh = (sender, args) =>
             {
                 // get a private key seed from your environment.
-                string seed = "SUACNAC2QZKPXKLKOE3TM3OPZ45P6VGQDVUPBLMFZEMKFPBBVHMLDOKFCQ";
+                string seed = "SUAHZGQCK3PKMY5JBY2PBJUK2SA2IAGNX7VXYQJ75MLIU2IWQE235OBLJM";
 
                 // Generate a NkeyPair
                 NkeyPair kp = Nkeys.FromSeed(seed);
@@ -73,70 +47,16 @@ namespace Oxide.Ext.GamingApi.Tests
                 // args property.  This must be set.
                 args.SignedNonce = kp.Sign(args.ServerNonce);
             };
-            opts.SetNkey("UCNCZJYZY7EHLN64DBIEWJVLJGL5T3JFK7OAUXXCH7XJM337LEVFOSCX", sigEh);
-            blackhawkNats.Connect(opts);
-            blackhawkTestNats.Connect(opts);
-        }
-        [TearDown()]
-        public void teardown()
-        {
-            blackhawkNats.Close();
-        }
-        [Test()]
-        public void SubscribeToRustServersServerIdPlayersSteamIdTitlesAquiredTest()
-        {
-            AutoResetEvent stopWaitHandle = new AutoResetEvent(false);
-            Assert.IsTrue(blackhawkNats.IsConnected());
-            Assert.IsTrue(blackhawkTestNats.IsConnected());
-            String gotServerId = string.Empty;
-            String gotSteamId = string.Empty;
-            PublishForServerPlayerTitleAcquired gotMessage = new PublishForServerPlayerTitleAcquired();
-            String serverId = "1234";
-            String steamId = "test";
-            var test = new RustServersServerIdPlayersSteamIdTitlesAquiredOnRequest((PublishForServerPlayerTitleAcquired request, string server_id, string steam_id) =>
-            {
-                gotServerId = server_id;
-                gotSteamId = steam_id;
-                gotMessage = request;
-                stopWaitHandle.Set();
-            });
-            blackhawkNats.SubscribeToRustServersServerIdPlayersSteamIdTitlesAquired(test, "*", "*");
-            var message = new PublishForServerPlayerTitleAcquired();
-            message.Description = "description";
-            message.SteamId = "TEst";
-            message.Title = "TitleTest";
-            message.TitleColor = "#21321";
-            message.TitleId = 21;
-            blackhawkTestNats.PublishToRustServersServerIdPlayersSteamIdTitlesAquired(message, serverId, steamId);
-            stopWaitHandle.WaitOne();
-            Assert.AreEqual(serverId, gotServerId);
-            Assert.AreEqual(steamId, gotSteamId);
-            Assert.AreEqual(message.Description, gotMessage.Description);
-            Assert.AreEqual(message.SteamId, gotMessage.SteamId);
-            Assert.AreEqual(message.Title, gotMessage.Title);
-            Assert.AreEqual(message.TitleColor, gotMessage.TitleColor);
-            Assert.AreEqual(message.TitleId, gotMessage.TitleId);
+            opts.SetNkey("UCI2NCSIEV3DXLYYR5KQXYCZ7CIW4KYXHLSGXJOZ7TSRRKHP2BM5IVMU", sigEh);
+            instance.Connect(opts);
         }
 
         [Test()]
         public void replyToRustApiprocessServersServerIdEventsStartedTest()
         {
             Assert.IsTrue(blackhawkNats.IsConnected());
-            Assert.IsTrue(blackhawkTestNats.IsConnected());
-            String gotServerId = string.Empty;
-            var messageToReply = new ReplyForServerStarted();
-            messageToReply.StatusMessage = "Everything ok";
-            RustApiprocessServersServerIdEventsStartedOnRequest test = new RustApiprocessServersServerIdEventsStartedOnRequest((string server_id) =>
-            {
-                gotServerId = server_id;
-                return messageToReply;
-            });
-            blackhawkTestNats.ReplyToRustApiprocessServersServerIdEventsStarted(test, "test");
-            ReplyForServerStarted reply = blackhawkNats.RequestRustApiprocessServersServerIdEventsStarted("test");
-            Trace.WriteLine(gotServerId);
-            Assert.AreEqual("test", gotServerId);
-            Assert.AreEqual(reply.StatusMessage, messageToReply.StatusMessage);
+            blackhawkNats.PublishToV0RustServersServerIdEventsStarted("101");
         }
-        
+
     }
 }

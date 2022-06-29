@@ -35,7 +35,7 @@ namespace Oxide.Ext.GamingApi
                 this.Logger.Error("NATS: Error: ");
                 this.Logger.Error("NATS:    Server: " + args.Conn.ConnectedUrl);
                 this.Logger.Error("NATS:    Message: " + args.Error);
-                this.Logger.Error("NATS:    Subject: " + args.Subscription.Subject);
+                this.Logger.Error("NATS:    Subject: " + args.Subscription?.Subject);
             };
 
             opts.ServerDiscoveredEventHandler += (sender, args) =>
@@ -84,10 +84,7 @@ namespace Oxide.Ext.GamingApi
                 Console.WriteLine($"NATS: {envName} environment variable not sat using default value.");
                 return "nats://localhost:4222";
             }
-            else
-            {
-                return value;
-            }
+            return value;
         }
         private string GetNatsNkeyUser()
         {
@@ -98,9 +95,7 @@ namespace Oxide.Ext.GamingApi
                 Console.WriteLine($"NATS: {envName} environment variable not sat using default value.");
                 return "UCNCZJYZY7EHLN64DBIEWJVLJGL5T3JFK7OAUXXCH7XJM337LEVFOSCX";
             }
-            else{
-                return value;
-            }
+            return value;
         }
         private string GetNatsNkeySeed()
         {
@@ -111,10 +106,8 @@ namespace Oxide.Ext.GamingApi
                 Console.WriteLine($"NATS: {envName} environment variable not sat using default value.");
                 return "SUACNAC2QZKPXKLKOE3TM3OPZ45P6VGQDVUPBLMFZEMKFPBBVHMLDOKFCQ";
             }
-            else
-            {
-                return value;
-            }
+            return value;
+            
         }
         #region Singleton
         static ReaderWriterLock rwl = new ReaderWriterLock();
