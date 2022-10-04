@@ -3,10 +3,10 @@
     <RootNamespace>Oxide.Ext.GamingApi</RootNamespace>
     <AssemblyName>Oxide.Ext.GamingApi</AssemblyName>
     <TargetFrameworks>net461</TargetFrameworks>
-    <Version>0.14.0</Version>
-    <PackageVersion>0.14.0</PackageVersion>
-    <AssemblyVersion>0.14.0.0</AssemblyVersion>
-    <FileVersion>0.14.0.0</FileVersion>
+    <Version>0.15.0</Version>
+    <PackageVersion>0.15.0</PackageVersion>
+    <AssemblyVersion>0.15.0.0</AssemblyVersion>
+    <FileVersion>0.15.0.0</FileVersion>
     <RepositoryUrl>https://github.com/GamingAPI/umod-rust-server-extension.git</RepositoryUrl>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net461|AnyCPU'">
@@ -230,6 +230,6 @@
     <Reference Include="UnityEngine.XRModule">
       <HintPath>..\dependencies\UnityEngine.XRModule.dll</HintPath>
     </Reference>
-    <PackageReference Include="RustGameAPI" Version="0.8.0" />
+    <PackageReference Include="RustGameAPI" Version="0.8.0"/>
   </ItemGroup>
 </Project>
