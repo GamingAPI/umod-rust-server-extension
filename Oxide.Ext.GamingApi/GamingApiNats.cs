@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 using Asyncapi.Nats.Client;
+using NATS.Client.JetStream;
 
 namespace Oxide.Ext.GamingApi
 {
@@ -70,6 +71,8 @@ namespace Oxide.Ext.GamingApi
             };
             opts.SetNkey(this.GetNatsNkeyUser(), sigEh);
             this.Connect(opts);
+            var jetstreamOptions = JetStreamOptions.Builder().Build();
+            this.createJetStreamContext(jetstreamOptions);
         }
         private GamingApiNats() : this(new Imp())
         {
