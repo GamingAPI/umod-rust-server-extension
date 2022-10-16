@@ -132,13 +132,12 @@ namespace Oxide.Ext.GamingApi.MessageQueue
                     actionToCall(() =>
                     {
                         //Message was successfull
+                        currentMessageCount--;
                     }, () =>
                     {
                         //If action was not successfull, add it do the retryMessageQueue
-                        AddMessageToQueue(retryMessageQueue, messageImportance, actionToCall);
-                        shouldRetryMessageQueue = true;
+                        AddToRetryMessageQueue(messageImportance, actionToCall);
                     });
-                    currentMessageCount--;
                     return;
                 }
             }
@@ -153,10 +152,8 @@ namespace Oxide.Ext.GamingApi.MessageQueue
                 }, () =>
                 {
                     //If action was not successfull, add it do the retryMessageQueue
-                    AddMessageToQueue(retryMessageQueue, messageImportance, actionToCall);
-                    shouldRetryMessageQueue = true;
+                    AddToRetryMessageQueue(messageImportance, actionToCall);
                 });
-                currentMessageCount--;
                 return;
             }
             else
@@ -188,6 +185,7 @@ namespace Oxide.Ext.GamingApi.MessageQueue
         public void AddToRetryMessageQueue(MessageImportance importance, Action<Action, Action> action)
         {
             AddMessageToQueue(retryMessageQueue, importance, action);
+            shouldRetryMessageQueue = true;
         }
         public void AddToMessageQueue(MessageImportance importance, Action<Action, Action> action)
         {

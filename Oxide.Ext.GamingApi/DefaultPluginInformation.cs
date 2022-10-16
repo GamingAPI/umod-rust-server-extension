@@ -48,7 +48,7 @@ namespace Oxide.Ext.GamingApi
             if (value == null)
             {
                 Interface.Oxide.LogInfo($"{envName} environment variable not sat using default value.");
-                return "" + 0;
+                return "0";
             }
             else
             {
