@@ -134,7 +134,7 @@ namespace Oxide.Ext.GamingApi
                 rwl.AcquireWriterLock(timeOut);
                 try
                 {
-                    if(instance != null)
+                    if (instance != null)
                     {
                         return instance;
                     }

@@ -1,13 +1,10 @@
 ﻿using Asyncapi.Nats.Client;
+using Asyncapi.Nats.Client.Models;
 using NATS.Client;
 using NATS.Client.JetStream;
 using NUnit.Framework;
 using System;
-using System.Diagnostics;
-using System.IO;
 using System.Text;
-using System.Text.Json;
-using System.Threading;
 
 namespace Oxide.Ext.GamingApi.Tests
 {
@@ -58,7 +55,9 @@ namespace Oxide.Ext.GamingApi.Tests
         public void replyToRustApiprocessServersServerIdEventsStartedTest()
         {
             Assert.IsTrue(blackhawkNats.IsConnected());
-            blackhawkNats.PublishToV0RustServersServerIdEventsStarted("101");
+            var message = new ServerStarted();
+            message.Timestamp = "test";
+            blackhawkNats.PublishToV0RustServersServerIdEventsStarted(message, "101");
         }
 
 

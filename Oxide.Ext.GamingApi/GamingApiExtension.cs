@@ -1,11 +1,9 @@
 ﻿namespace Oxide.Ext.GamingApi
 {
     using System;
-    using System.Collections.Generic;
     using System.Reflection;
     using Oxide.Core;
     using Oxide.Core.Extensions;
-    using Oxide.Ext.GamingApi;
 
     public class GamingApiExtension : Extension
     {
