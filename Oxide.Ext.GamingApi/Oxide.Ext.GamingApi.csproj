@@ -227,6 +227,6 @@
     <Reference Include="UnityEngine.XRModule">
       <HintPath>..\dependencies\UnityEngine.XRModule.dll</HintPath>
     </Reference>
-    <PackageReference Include="RustGameAPI" Version="0.13.0"/>
+    <PackageReference Include="RustGameAPI" Version="0.14.0" />
   </ItemGroup>
 </Project>
