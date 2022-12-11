@@ -1,4 +1,8 @@
-﻿using NATS.Client;
+﻿// Reference: NewtonsoftAlias.Json
+// Reference: NATS.Client
+// Reference: RustGameAPI
+
+using NATS.Client;
 using System;
 using System.Diagnostics;
 using System.Threading;
