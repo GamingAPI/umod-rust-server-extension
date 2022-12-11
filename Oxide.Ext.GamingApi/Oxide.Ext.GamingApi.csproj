@@ -18,7 +18,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="NewtonsoftAlias.Json">
-      <HintPath>..\..\rust-csharp-game-api\NewtonsoftAlias.Json.dll</HintPath>
+      <HintPath>..\NewtonsoftAlias.Json.dll</HintPath>
     </Reference>
     <Reference Include="Oxide.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

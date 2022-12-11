@@ -41,19 +41,12 @@ namespace Oxide.Ext.GamingApi
             Player p = new Player() { Name = "Test", Id = "TEST", Address = "123", AdditionalProperties = new Dictionary<string, object>()};
             p.AdditionalProperties.Add("TEST", 123);
 
-            JsonSerializerSettings settings = new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.Auto,
-                ContractResolver = OmitTypeNamesOnDynamicsResolver.Instance,
-                Formatting = Formatting.Indented,
-                Converters= new List<JsonConverter> { new PlayerConverter() }
-            };
-            var json = JsonConvert.SerializeObject(p, settings);
+            var json = JsonConvert.SerializeObject(p);
             Interface.Oxide.LogInfo("[GamingApi Ext] Serialized message " + json);
 
             Asyncapi.Nats.Client.Models.Player p2 = new Asyncapi.Nats.Client.Models.Player() { Name = "Test", Id = "TEST", Address = "123", AdditionalProperties = new Dictionary<string, object>() };
             p2.AdditionalProperties.Add("TEST", 123);
-            var json3 = JsonConvert.SerializeObject(p2, settings);
+            var json3 = JsonConvert.SerializeObject(p2);
             Interface.Oxide.LogInfo("[GamingApi Ext] Serialized message " + json3);
         }
 
