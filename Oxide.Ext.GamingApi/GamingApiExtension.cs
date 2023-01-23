@@ -6,7 +6,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
-using NewtonsoftAlias.Json;
 using Oxide.Core;
 using Oxide.Core.Extensions;
 
@@ -21,33 +20,6 @@ namespace Oxide.Ext.GamingApi
         {
             Interface.Oxide.LogInfo("[GamingApi Ext] Started");
             Interface.Oxide.LogInfo("[GamingApi Ext] Libraries " + manager.GetLibraries().ToString());
-            Account account = new Account
-            {
-                PackageId = "test"
-            };
-
-            string json2 = JsonConvert.SerializeObject(account, Formatting.Indented, new AccountConverter());
-            // {
-            //   "Email": "james@example.com",
-            //   "Active": true,
-            //   "CreatedDate": "2013-01-20T00:00:00Z",
-            //   "Roles": [
-            //     "User",
-            //     "Admin"
-            //   ]
-            // }
-
-            Interface.Oxide.LogInfo("[GamingApi Ext] Serialized message " + json2);
-            Player p = new Player() { Name = "Test", Id = "TEST", Address = "123", AdditionalProperties = new Dictionary<string, object>()};
-            p.AdditionalProperties.Add("TEST", 123);
-
-            var json = JsonConvert.SerializeObject(p);
-            Interface.Oxide.LogInfo("[GamingApi Ext] Serialized message " + json);
-
-            Asyncapi.Nats.Client.Models.Player p2 = new Asyncapi.Nats.Client.Models.Player() { Name = "Test", Id = "TEST", Address = "123", AdditionalProperties = new Dictionary<string, object>() };
-            p2.AdditionalProperties.Add("TEST", 123);
-            var json3 = JsonConvert.SerializeObject(p2);
-            Interface.Oxide.LogInfo("[GamingApi Ext] Serialized message " + json3);
         }
 
         ////public override bool SupportsReloading => true;

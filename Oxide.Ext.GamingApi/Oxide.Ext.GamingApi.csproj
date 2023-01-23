@@ -16,10 +16,7 @@
     <None Remove="RustGameAPI"/>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp"/>
-    <Reference Include="NewtonsoftAlias.Json">
-      <HintPath>..\NewtonsoftAlias.Json.dll</HintPath>
-    </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Oxide.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dependencies\Oxide.Core.dll</HintPath>
@@ -29,7 +26,7 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\dependencies\NewtonsoftAlias.Json</HintPath>
-      <Aliases>NewtonsoftAlias</Aliases>
+      <Aliases></Aliases>
     </Reference>
     <Reference Include="Oxide.Rust">
       <HintPath>..\dependencies\Oxide.Rust.dll</HintPath>
@@ -234,6 +231,6 @@
     <Reference Include="UnityEngine.XRModule">
       <HintPath>..\dependencies\UnityEngine.XRModule.dll</HintPath>
     </Reference>
-    <PackageReference Include="RustGameAPI" Version="0.16.0"/>
+    <PackageReference Include="RustGameAPI" Version="0.17.0" />
   </ItemGroup>
 </Project>
