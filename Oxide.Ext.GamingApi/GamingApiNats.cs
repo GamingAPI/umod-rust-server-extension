@@ -72,6 +72,7 @@ namespace Oxide.Ext.GamingApi
                     // Obtain a user JWT...
                     string jwt = this.GetNatsJwtUser();
 
+                    this.Logger.Info("NATS: Loading jwt token : " + jwt);
                     // You must set the JWT in the args to hand off
                     // to the client library.
                     args.JWT = jwt;
@@ -81,6 +82,7 @@ namespace Oxide.Ext.GamingApi
                 {
                     // get a private key seed from your environment.
                     string seed = this.GetNatsJwtSeed();
+                    this.Logger.Info("NATS: Loading jwt seed : " + seed.Substring(0, 3));
 
                     // Generate a NkeyPair
                     NkeyPair kp = Nkeys.FromSeed(seed);
