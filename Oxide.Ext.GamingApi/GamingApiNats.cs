@@ -84,7 +84,7 @@ namespace Oxide.Ext.GamingApi
                 {
                     // get a private key seed from your environment.
                     string seed = this.GetNatsJwtSeed();
-                    this.Logger.Info("NATS: Loading jwt seed : " + seed.Substring(0, 3));
+                    this.Logger.Info("NATS: Loading jwt seed : " + seed.Substring(seed.Length-4, seed.Length-1));
 
                     // Generate a NkeyPair
                     NkeyPair kp = Nkeys.FromSeed(seed);
@@ -167,16 +167,6 @@ namespace Oxide.Ext.GamingApi
         private string GetNatsNkeySeed()
         {
             var envName = $"GAMINGAPI_NATS_NKEY_SEED";
-            var envFileName = envName + "_FILE";
-
-            var fileName = Environment.GetEnvironmentVariable(envFileName);
-            if (fileName != null)
-            {
-                this.Logger.Info($"NATS: {envFileName} loading from file");
-                string contents = File.ReadAllText(@fileName);
-                return contents;
-            }
-
             var value = Environment.GetEnvironmentVariable(envName);
             this.Logger.Info($"NATS: {envName} loading");
             if (value == null)
@@ -214,6 +204,15 @@ namespace Oxide.Ext.GamingApi
         private string GetNatsJwtSeed()
         {
             var envName = $"GAMINGAPI_NATS_JWT_SEED";
+            var envFileName = envName + "_FILE";
+
+            var fileName = Environment.GetEnvironmentVariable(envFileName);
+            if (fileName != null)
+            {
+                this.Logger.Info($"NATS: {envFileName} loading from file");
+                string contents = File.ReadAllText(@fileName);
+                return contents;
+            }
             var value = Environment.GetEnvironmentVariable(envName);
             if (value == null)
             {
