@@ -181,7 +181,6 @@ namespace Oxide.Ext.GamingApi
                 return "SUACNAC2QZKPXKLKOE3TM3OPZ45P6VGQDVUPBLMFZEMKFPBBVHMLDOKFCQ";
             }
             return value;
-
         }
 
         private string GetNatsJwtUser()
