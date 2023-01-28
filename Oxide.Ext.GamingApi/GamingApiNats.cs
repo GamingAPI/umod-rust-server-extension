@@ -125,10 +125,10 @@ namespace Oxide.Ext.GamingApi
             var value = Environment.GetEnvironmentVariable(envName);
             if (value == null)
             {
-                Console.WriteLine($"NATS: {envName} environment variable not sat using default value.");
+                this.Logger.Info($"NATS: {envName} environment variable not sat using default value.");
                 return "nats://localhost:4222";
             }
-            Console.WriteLine($"NATS: {envName} loading - {value}");
+            this.Logger.Info($"NATS: {envName} loading - {value}");
             return value;
         }
 
@@ -144,10 +144,10 @@ namespace Oxide.Ext.GamingApi
             var value = Environment.GetEnvironmentVariable(envName);
             if (value == null)
             {
-                Console.WriteLine($"NATS: {envName} environment variable not sat using default value.");
+                this.Logger.Info($"NATS: {envName} environment variable not sat using default value.");
                 return "jwt";
             }
-            Console.WriteLine($"NATS: {envName} loading - {value}");
+            this.Logger.Info($"NATS: {envName} loading - {value}");
             return value;
         }
 
@@ -155,10 +155,10 @@ namespace Oxide.Ext.GamingApi
         {
             var envName = $"GAMINGAPI_NATS_NKEY_USER"; 
             var value = Environment.GetEnvironmentVariable(envName);
-            Console.WriteLine($"NATS: {envName} loading");
+            this.Logger.Info($"NATS: {envName} loading");
             if (value == null)
             {
-                Console.WriteLine($"NATS: {envName} environment variable not sat using default value.");
+                this.Logger.Info($"NATS: {envName} environment variable not sat using default value.");
                 return "UCNCZJYZY7EHLN64DBIEWJVLJGL5T3JFK7OAUXXCH7XJM337LEVFOSCX";
             }
             return value;
@@ -172,16 +172,16 @@ namespace Oxide.Ext.GamingApi
             var fileName = Environment.GetEnvironmentVariable(envFileName);
             if (fileName != null)
             {
-                Console.WriteLine($"NATS: {envFileName} loading from file");
+                this.Logger.Info($"NATS: {envFileName} loading from file");
                 string contents = File.ReadAllText(@fileName);
                 return contents;
             }
 
             var value = Environment.GetEnvironmentVariable(envName);
-            Console.WriteLine($"NATS: {envName} loading");
+            this.Logger.Info($"NATS: {envName} loading");
             if (value == null)
             {
-                Console.WriteLine($"NATS: {envName} environment variable not sat using default value.");
+                this.Logger.Info($"NATS: {envName} environment variable not sat using default value.");
                 return "SUACNAC2QZKPXKLKOE3TM3OPZ45P6VGQDVUPBLMFZEMKFPBBVHMLDOKFCQ";
             }
             return value;
@@ -196,16 +196,16 @@ namespace Oxide.Ext.GamingApi
             var fileName = Environment.GetEnvironmentVariable(envFileName);
             if (fileName != null)
             {
-                Console.WriteLine($"NATS: {envFileName} loading from file");
+                this.Logger.Info($"NATS: {envFileName} loading from file");
                 string contents = File.ReadAllText(@fileName);
                 return contents;
             }
 
             var value = Environment.GetEnvironmentVariable(envName);
-            Console.WriteLine($"NATS: {envName} loading");
+            this.Logger.Info($"NATS: {envName} loading");
             if (value == null)
             {
-                Console.WriteLine($"NATS: {envName} environment variable not sat using default value.");
+                this.Logger.Info($"NATS: {envName} environment variable not sat using default value.");
                 return "J0eXAiOiJKV1QiLCJhbGciOiJlZDI1NTE5LW5rZXkifQ.eyJqdGkiOiJTWDU1RkYzQ1NTQ1ZXU1lIS0lMQUtJRVZWQlhJVFZTMlJWQTdOWEhNTlJIQUhRNFFWVDdRIiwiaWF0IjoxNjczMTU3ODQ2LCJpc3MiOiJBQk9OUEpWTkI3UzRZTFpKUTVUWkNZRzVKWkQ2T09CRFIyNlVUVzZUSFg3T1dDVVNFU1pSUkhGRiIsIm5hbWUiOiJydXN0X3NlcnZlciIsInN1YiI6IlVDRVJWT1hRMlFGNkRBWEdDNVZNUDJYWEczWTVJQjdBN1RGQ1hFTEVHT1ZXRTRHV0lFRkNRSzZXIiwibmF0cyI6eyJwdWIiOnsiYWxsb3ciOlsidjAucnVzdC5zZXJ2ZXJzLlx1MDAzZSJdfSwic3ViIjp7ImFsbG93IjpbIl9JTkJPWC5cdTAwM2UiXX0sInJlc3AiOnsibWF4IjoxLCJ0dGwiOjB9LCJzdWJzIjotMSwiZGF0YSI6LTEsInBheWxvYWQiOi0xLCJ0eXBlIjoidXNlciIsInZlcnNpb24iOjJ9fQ.VRXdyowAR1Nb8-i0OMyI9jll3hU3kIm7BPIaas-xsJkT0eD_DhBd2hxEQBtHS8cCqp7M9SwYYKL-wIb6baOjAw";
             }
             return value;
@@ -217,7 +217,7 @@ namespace Oxide.Ext.GamingApi
             var value = Environment.GetEnvironmentVariable(envName);
             if (value == null)
             {
-                Console.WriteLine($"NATS: {envName} environment variable not sat using default value.");
+                this.Logger.Info($"NATS: {envName} environment variable not sat using default value.");
                 return "SUAIDAQVH67GXNFUALIVHFKC24SZCFR3BZF3GGHYVQDHVB3CG3GDGVWPUM";
             }
             return value;
