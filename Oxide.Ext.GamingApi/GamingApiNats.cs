@@ -8,6 +8,8 @@ using System.Diagnostics;
 using System.Threading;
 using Asyncapi.Nats.Client;
 using NATS.Client.JetStream;
+using System.Configuration;
+using System.IO;
 
 namespace Oxide.Ext.GamingApi
 {
@@ -162,6 +164,16 @@ namespace Oxide.Ext.GamingApi
         private string GetNatsNkeySeed()
         {
             var envName = $"GAMINGAPI_NATS_NKEY_SEED";
+            var envFileName = envName + "_FILE";
+
+
+            var fileName = Environment.GetEnvironmentVariable(envFileName);
+            if (fileName != null)
+            {
+                string contents = File.ReadAllText(@fileName);
+                return contents;
+            }
+
             var value = Environment.GetEnvironmentVariable(envName);
             if (value == null)
             {
@@ -174,7 +186,18 @@ namespace Oxide.Ext.GamingApi
 
         private string GetNatsJwtUser()
         {
+
             var envName = $"GAMINGAPI_NATS_JWT_USER";
+            var envFileName = envName + "_FILE";
+
+
+            var fileName = Environment.GetEnvironmentVariable(envFileName);
+            if (fileName != null)
+            {
+                string contents = File.ReadAllText(@fileName);
+                return contents;
+            }
+
             var value = Environment.GetEnvironmentVariable(envName);
             if (value == null)
             {
