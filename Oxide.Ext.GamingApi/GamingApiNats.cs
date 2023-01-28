@@ -128,6 +128,7 @@ namespace Oxide.Ext.GamingApi
                 Console.WriteLine($"NATS: {envName} environment variable not sat using default value.");
                 return "nats://localhost:4222";
             }
+            Console.WriteLine($"NATS: {envName} loading - {value}");
             return value;
         }
 
@@ -146,6 +147,7 @@ namespace Oxide.Ext.GamingApi
                 Console.WriteLine($"NATS: {envName} environment variable not sat using default value.");
                 return "jwt";
             }
+            Console.WriteLine($"NATS: {envName} loading - {value}");
             return value;
         }
 
@@ -153,6 +155,7 @@ namespace Oxide.Ext.GamingApi
         {
             var envName = $"GAMINGAPI_NATS_NKEY_USER"; 
             var value = Environment.GetEnvironmentVariable(envName);
+            Console.WriteLine($"NATS: {envName} loading");
             if (value == null)
             {
                 Console.WriteLine($"NATS: {envName} environment variable not sat using default value.");
@@ -166,15 +169,16 @@ namespace Oxide.Ext.GamingApi
             var envName = $"GAMINGAPI_NATS_NKEY_SEED";
             var envFileName = envName + "_FILE";
 
-
             var fileName = Environment.GetEnvironmentVariable(envFileName);
             if (fileName != null)
             {
+                Console.WriteLine($"NATS: {envFileName} loading from file");
                 string contents = File.ReadAllText(@fileName);
                 return contents;
             }
 
             var value = Environment.GetEnvironmentVariable(envName);
+            Console.WriteLine($"NATS: {envName} loading");
             if (value == null)
             {
                 Console.WriteLine($"NATS: {envName} environment variable not sat using default value.");
@@ -189,15 +193,16 @@ namespace Oxide.Ext.GamingApi
             var envName = $"GAMINGAPI_NATS_JWT_USER";
             var envFileName = envName + "_FILE";
 
-
             var fileName = Environment.GetEnvironmentVariable(envFileName);
             if (fileName != null)
             {
+                Console.WriteLine($"NATS: {envFileName} loading from file");
                 string contents = File.ReadAllText(@fileName);
                 return contents;
             }
 
             var value = Environment.GetEnvironmentVariable(envName);
+            Console.WriteLine($"NATS: {envName} loading");
             if (value == null)
             {
                 Console.WriteLine($"NATS: {envName} environment variable not sat using default value.");
