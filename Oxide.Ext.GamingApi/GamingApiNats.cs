@@ -10,6 +10,7 @@ using Asyncapi.Nats.Client;
 using NATS.Client.JetStream;
 using System.Configuration;
 using System.IO;
+using System.Text;
 
 namespace Oxide.Ext.GamingApi
 {
@@ -84,7 +85,7 @@ namespace Oxide.Ext.GamingApi
                 {
                     // get a private key seed from your environment.
                     string seed = this.GetNatsJwtSeed();
-                    this.Logger.Info("NATS: Loading jwt seed : " + seed.Substring(0, 3));
+                    this.Logger.Info("NATS: Loading jwt seed : " + seed.Substring(0, 3) + "....");
 
                     // Generate a NkeyPair
                     NkeyPair kp = Nkeys.FromSeed(seed);
@@ -176,7 +177,16 @@ namespace Oxide.Ext.GamingApi
             }
             return value;
         }
-
+        public string PrintByteArray(byte[] bytes)
+        {
+            var sb = new StringBuilder("new byte[] { ");
+            foreach (var b in bytes)
+            {
+                sb.Append(b + ", ");
+            }
+            sb.Append("}");
+            return sb.ToString();
+        }
         private string GetNatsJwtUser()
         {
 
@@ -188,6 +198,7 @@ namespace Oxide.Ext.GamingApi
             {
                 this.Logger.Info($"NATS: {envFileName} loading from file");
                 string contents = File.ReadAllText(@fileName);
+                this.Logger.Info($"NATS: {envFileName} length was - {PrintByteArray(Encoding.UTF8.GetBytes(contents))}");
                 return contents;
             }
 
@@ -211,6 +222,7 @@ namespace Oxide.Ext.GamingApi
             {
                 this.Logger.Info($"NATS: {envFileName} loading from file");
                 string contents = File.ReadAllText(@fileName);
+                this.Logger.Info($"NATS: {envFileName} length was - {PrintByteArray(Encoding.UTF8.GetBytes(contents))}");
                 return contents;
             }
             var value = Environment.GetEnvironmentVariable(envName);
