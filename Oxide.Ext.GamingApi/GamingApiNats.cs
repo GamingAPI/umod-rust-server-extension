@@ -84,7 +84,7 @@ namespace Oxide.Ext.GamingApi
                 {
                     // get a private key seed from your environment.
                     string seed = this.GetNatsJwtSeed();
-                    this.Logger.Info("NATS: Loading jwt seed : " + seed.Substring(seed.Length-4, seed.Length-1));
+                    this.Logger.Info("NATS: Loading jwt seed : " + seed.Substring(0, 3));
 
                     // Generate a NkeyPair
                     NkeyPair kp = Nkeys.FromSeed(seed);
