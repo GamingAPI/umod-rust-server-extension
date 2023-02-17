@@ -11,6 +11,7 @@ using NATS.Client.JetStream;
 using System.Configuration;
 using System.IO;
 using System.Text;
+using UnityEngine;
 
 namespace Oxide.Ext.GamingApi
 {
@@ -70,31 +71,39 @@ namespace Oxide.Ext.GamingApi
             opts.Url = this.GetNatsHost();
             string authenticationType = GetNatsAuthenticationType();
             if(authenticationType == "jwt") {
-                EventHandler<UserJWTEventArgs> jwtEh = (sender, args) =>
+                string NatsJwtUserFile = this.GetNatsJwtUserFile();
+                if (NatsJwtUserFile == null)
                 {
-                    // Obtain a user JWT...
-                    string jwt = this.GetNatsJwtUser();
+                    EventHandler<UserJWTEventArgs> jwtEh = (sender, args) =>
+                    {
+                        // Obtain a user JWT...
+                        string jwt = this.GetNatsJwtUser();
 
-                    this.Logger.Info("NATS: Loading jwt token : " + jwt);
-                    // You must set the JWT in the args to hand off
-                    // to the client library.
-                    args.JWT = jwt;
-                };
+                        this.Logger.Info("NATS: Loading jwt token : " + jwt);
+                        // You must set the JWT in the args to hand off
+                        // to the client library.
+                        args.JWT = jwt;
+                    };
 
-                EventHandler<UserSignatureEventArgs> sigEh = (sender, args) =>
+                    EventHandler<UserSignatureEventArgs> sigEh = (sender, args) =>
+                    {
+                        // get a private key seed from your environment.
+                        string seed = this.GetNatsJwtSeed();
+                        this.Logger.Info("NATS: Loading jwt seed : " + seed.Substring(0, 3) + "....");
+
+                        // Generate a NkeyPair
+                        NkeyPair kp = Nkeys.FromSeed(seed);
+
+                        // Sign the nonce and return the result in the SignedNonce
+                        // args property.  This must be set.
+                        args.SignedNonce = kp.Sign(args.ServerNonce);
+                    };
+                    opts.SetUserCredentialHandlers(jwtEh, sigEh);
+                } else
                 {
-                    // get a private key seed from your environment.
-                    string seed = this.GetNatsJwtSeed();
-                    this.Logger.Info("NATS: Loading jwt seed : " + seed.Substring(0, 3) + "....");
-
-                    // Generate a NkeyPair
-                    NkeyPair kp = Nkeys.FromSeed(seed);
-
-                    // Sign the nonce and return the result in the SignedNonce
-                    // args property.  This must be set.
-                    args.SignedNonce = kp.Sign(args.ServerNonce);
-                };
-                opts.SetUserCredentialHandlers(jwtEh, sigEh);
+                    string NatsJwtSeedFile = this.GetNatsJwtSeedFile();
+                    opts.SetUserCredentials(NatsJwtUserFile, NatsJwtSeedFile);
+                }
             } else
             {
                 // NKey authentication
@@ -187,20 +196,15 @@ namespace Oxide.Ext.GamingApi
             sb.Append("}");
             return sb.ToString();
         }
+        private string GetNatsJwtUserFile()
+        {
+            var envName = $"GAMINGAPI_NATS_JWT_USER_FILE";
+            var fileName = Environment.GetEnvironmentVariable(envName);
+            return fileName;
+        }
         private string GetNatsJwtUser()
         {
-
             var envName = $"GAMINGAPI_NATS_JWT_USER";
-            var envFileName = envName + "_FILE";
-
-            var fileName = Environment.GetEnvironmentVariable(envFileName);
-            if (fileName != null)
-            {
-                this.Logger.Info($"NATS: {envFileName} loading from file");
-                string contents = File.ReadAllText(@fileName);
-                this.Logger.Info($"NATS: {envFileName} length was - {PrintByteArray(Encoding.UTF8.GetBytes(contents))}");
-                return contents;
-            }
 
             var value = Environment.GetEnvironmentVariable(envName);
             this.Logger.Info($"NATS: {envName} loading");
@@ -212,19 +216,15 @@ namespace Oxide.Ext.GamingApi
             return value;
         }
 
+        private string GetNatsJwtSeedFile()
+        {
+            var envName = $"GAMINGAPI_NATS_JWT_SEED_FILE";
+            var fileName = Environment.GetEnvironmentVariable(envName);
+            return fileName;
+        }
         private string GetNatsJwtSeed()
         {
             var envName = $"GAMINGAPI_NATS_JWT_SEED";
-            var envFileName = envName + "_FILE";
-
-            var fileName = Environment.GetEnvironmentVariable(envFileName);
-            if (fileName != null)
-            {
-                this.Logger.Info($"NATS: {envFileName} loading from file");
-                string contents = File.ReadAllText(@fileName);
-                this.Logger.Info($"NATS: {envFileName} length was - {PrintByteArray(Encoding.UTF8.GetBytes(contents))}");
-                return contents;
-            }
             var value = Environment.GetEnvironmentVariable(envName);
             if (value == null)
             {
