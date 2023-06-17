@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Oxide.Ext.GamingApiTests</RootNamespace>
     <AssemblyName>Oxide.Ext.GamingApiTests</AssemblyName>
-    <TargetFrameworks>net461</TargetFrameworks>
+    <TargetFrameworks>net48</TargetFrameworks>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -115,9 +115,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="AsyncVerifyForMoqExtensions.cs" />
-    <Compile Include="GamingApiMessageQueueTests.cs" />
-    <Compile Include="GamingApiNatsTests.cs" />
+    <Compile Include="GamingApiNatsTests - Copy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
