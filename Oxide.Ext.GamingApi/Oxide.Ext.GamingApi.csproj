@@ -16,7 +16,10 @@
     <None Remove="RustGameAPI"/>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp"/>
+    <PackageReference Include="RustGameAPI" Version="0.19.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Oxide.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dependencies\Oxide.Core.dll</HintPath>
@@ -231,6 +234,5 @@
     <Reference Include="UnityEngine.XRModule">
       <HintPath>..\dependencies\UnityEngine.XRModule.dll</HintPath>
     </Reference>
-    <PackageReference Include="RustGameAPI" Version="0.19.0"/>
   </ItemGroup>
 </Project>
